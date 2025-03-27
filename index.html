@@ -165,24 +165,24 @@
 
       .sections-container:hover .sections-image,
       .section5-container:hover .section5-image {
-        opacity: 0.7; /* The image will become slightly transparent when hovered */
+        opacity: 0.7;
       }
 
       .image-overlay {
         position: absolute;
         top: 50%;
         left: 50%;
-        transform: translate(-50%, -50%); /* Centers the text */
-        color: white; /* Text color */
+        transform: translate(-50%, -50%);
+        color: white;
         font-size: 2em;
         font-weight: bold;
-        opacity: 0; /* Initially hidden */
+        opacity: 0;
         transition: opacity 0.3s ease-in-out;
       }
 
       .sections-container:hover .image-overlay,
       .section5-container:hover .image-overlay {
-        opacity: 1; /* Makes the text appear when the image is hovered */
+        opacity: 1;
       }
 
       #table-of-contents {
@@ -399,14 +399,14 @@
     <script>
       function launchConfetti() {
         const box = document.querySelector(".box");
-        const boxRect = box.getBoundingClientRect(); // Get position of the box
+        const boxRect = box.getBoundingClientRect();
 
         confetti({
           particleCount: 100,
           spread: 90,
           origin: {
-            x: (boxRect.left + boxRect.width / 2) / window.innerWidth, // Center x position of the box
-            y: (boxRect.top + boxRect.height / 2) / window.innerHeight, // y position at the vertical center of the box
+            x: (boxRect.left + boxRect.width / 2) / window.innerWidth,
+            y: (boxRect.top + boxRect.height / 2) / window.innerHeight,
           },
           colors: ["#ff6347", "#32cd32", "#1e90ff", "#ff1493"],
         });
