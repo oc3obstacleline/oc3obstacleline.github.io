@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
@@ -361,18 +360,6 @@
       </div>
     </section>
     <script>
-      let player;
-
-      function onYouTubeIframeAPIReady() {
-        player = new YT.Player("youtubePlayer", {
-          events: {
-            onReady: function (event) {
-              event.target.playVideo();
-            },
-          },
-        });
-      }
-
       function launchConfetti() {
         const box = document.querySelector(".box");
         const boxRect = box.getBoundingClientRect(); // Get position of the box
