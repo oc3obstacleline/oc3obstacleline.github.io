@@ -41,20 +41,20 @@
         font-family: "Poppins", sans-serif;
         opacity: 0;
         transform: translateY(-80px);
-        animation: fadeIn 4s ease-out forwards;
+        animation: fadeineffect 4s ease-out forwards;
         color: #000000;
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
           -3px -3px 5px rgba(0, 0, 0, 0.3);
       }
 
-      @keyframes fadeIn {
+      @keyframes fadeineffect {
         to {
           opacity: 1;
           transform: translateY(0);
         }
       }
 
-      .interactive-btn {
+      .buttonpress {
         background-color: #7a1414;
         color: #fff;
         border: none;
@@ -66,7 +66,7 @@
         margin-top: 20px;
       }
 
-      .interactive-btn:hover {
+      .buttonpress:hover {
         background-color: #c96551;
       }
       .box {
@@ -107,14 +107,14 @@
         display: inline-block;
         font-size: 1.5em;
         opacity: 0;
-        animation: popIn 4s ease-in-out forwards;
+        animation: zoomin 4s ease-in-out forwards;
         color: #000000;
         font-weight: bold;
         text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
           -3px -3px 5px rgba(0, 0, 0, 0.3);
       }
 
-      @keyframes popIn {
+      @keyframes zoomin {
         from {
           opacity: 0;
           transform: scale(0.5);
@@ -168,7 +168,7 @@
         opacity: 0.7;
       }
 
-      .image-overlay {
+      .greyout {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -180,8 +180,8 @@
         transition: opacity 0.3s ease-in-out;
       }
 
-      .sections-container:hover .image-overlay,
-      .section5-container:hover .image-overlay {
+      .sections-container:hover .greyout,
+      .section5-container:hover .greyout {
         opacity: 1;
       }
 
@@ -225,7 +225,7 @@
         text-align: center;
       }
 
-      .close-btn {
+      .Xbutton {
         position: absolute;
         top: 5px;
         left: 10px;
@@ -234,7 +234,7 @@
         cursor: pointer;
       }
 
-      .close-btn:hover {
+      .Xbutton:hover {
         color: #d77a61;
       }
 
@@ -256,7 +256,7 @@
         opacity: 0.7;
       }
 
-      .video-overlay {
+      .video-greyout {
         position: absolute;
         top: 50%;
         left: 50%;
@@ -268,7 +268,7 @@
         transition: opacity 0.3s ease-in-out;
       }
 
-      .video-container:hover .video-overlay {
+      .video-container:hover .video-greyout {
         opacity: 1;
       }
 
@@ -288,7 +288,7 @@
       How did Italian immigrants shape Toronto's multicultural identity?
     </p>
 
-    <div class="box" onclick="launchConfetti()">
+    <div class="box" onclick="confetti()">
       <img
         src="https://italianmarketphilly.org/wp-content/uploads/2023/10/IMF2023_EntertainmentSunday_CreditKatKuo_022-1024x681.jpg"
         alt="Italy"
@@ -297,14 +297,14 @@
     </div>
 
     <button
-      class="interactive-btn"
-      onclick="changeColor(); showTableOfContents(); playAudio()"
+      class="buttonpress"
+      onclick="highlighted(); TOCshow(); startmusic()"
     >
       Get Started
     </button>
 
     <div id="table-of-contents">
-      <span class="close-btn" onclick="hideTableOfContents()">&#10005;</span>
+      <span class="Xbutton" onclick="TOChide()">&#10005;</span>
       <h2>Table of Contents</h2>
       <ul>
         <li><a href="#section1">Introduction</a></li>
@@ -336,7 +336,7 @@
           class="sections-image"
           src="https://live.staticflickr.com/65535/53097249697_1e990f0ba8_b.jpg"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Fruit Store in Little Italy, Toronto</span>
         </div>
       </div>
@@ -347,7 +347,7 @@
             type="video/mp4"
           />
         </video>
-        <div class="video-overlay">
+        <div class="video-greyout">
           <span>Atrani, Campania</span>
         </div>
       </div>
@@ -395,7 +395,7 @@
           class="section5-image"
           src="https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1271478289i/8049510.jpg"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Eh, Paesan!: Being Italian in Toronto</span>
         </div>
       </div>
@@ -404,7 +404,7 @@
           class="sections-image"
           src="https://images.pexels.com/photos/31321238/pexels-photo-31321238/free-photo-of-street-musician-playing-guitar-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Venice, Veneto</span>
         </div>
       </div>
@@ -436,7 +436,7 @@
           class="sections-image"
           src="https://lh3.googleusercontent.com/p/AF1QipOCudBI8vHkVcSQgFwVZrz5liIOXiTCAwCZYXW6=s680-w680-h510"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Casa Abruzzo, Toronto</span>
         </div>
       </div>
@@ -456,7 +456,7 @@
           class="sections-image"
           src="https://images.pexels.com/photos/31252109/pexels-photo-31252109/free-photo-of-historic-tram-street-scene-in-porta-ticinese-milan.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Milano, Lombardy</span>
         </div>
       </div>
@@ -476,7 +476,7 @@
           class="section5-image"
           src="https://cdn.britannica.com/25/237725-050-FAB638D6/Italian-composer-Luigi-Boccherini.jpg?w=100"
         />
-        <div class="image-overlay">
+        <div class="greyout">
           <span>Luigi Boccherini</span>
         </div>
       </div>
@@ -505,7 +505,7 @@ McGill-Queen’s University Press, 2008.<br>
     </section>
 
     <script>
-      function launchConfetti() {
+      function confetti() {
         const box = document.querySelector(".box");
         const boxRect = box.getBoundingClientRect();
 
@@ -520,8 +520,8 @@ McGill-Queen’s University Press, 2008.<br>
         });
       }
 
-      function changeColor() {
-        const button = document.querySelector(".interactive-btn");
+      function highlighted() {
+        const button = document.querySelector(".buttonpress");
 
         button.addEventListener("mousedown", () => {
           button.style.backgroundColor = "#c96551";
@@ -536,7 +536,7 @@ McGill-Queen’s University Press, 2008.<br>
         });
       }
 
-      function showTableOfContents() {
+      function TOCshow() {
         const toc = document.getElementById("table-of-contents");
         toc.style.display = "block";
         setTimeout(() => {
@@ -544,7 +544,7 @@ McGill-Queen’s University Press, 2008.<br>
         }, 10);
       }
 
-      function hideTableOfContents() {
+      function TOChide() {
         const toc = document.getElementById("table-of-contents");
         toc.classList.remove("show");
         setTimeout(() => {
@@ -552,7 +552,7 @@ McGill-Queen’s University Press, 2008.<br>
         }, 500);
       }
 
-      function playAudio() {
+      function startmusic() {
         const audio = document.getElementById("myAudio");
         audio.volume = 0.1;
         audio.play();
