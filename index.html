@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>APITEC1791 Jason Kern</title>
+    <style>
+      body,
+      p,
+      div,
+      span,
+      section {
+        text-align: center !important;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(
+            115deg,
+            rgba(39, 109, 1, 0.9) 40%,
+            rgba(148, 9, 5, 0.9) 70%
+          ),
+          url("https://cdn.pixabay.com/photo/2015/01/28/23/32/window-615427_1280.jpg");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-position: center;
+        color: #000000;
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+      }
+
+      h1 {
+        font-size: 3em;
+        font-family: "Poppins", sans-serif;
+        opacity: 0;
+        transform: translateY(-80px);
+        animation: fadeIn 4s ease-out forwards;
+        color: #000000;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+          -3px -3px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .interactive-btn {
+        background-color: #7a1414;
+        color: #fff;
+        border: none;
+        padding: 15px 30px;
+        font-size: 1.2em;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-top: 20px;
+      }
+
+      .interactive-btn:hover {
+        background-color: #c96551;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.3);
+        margin: 20px auto;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transition: transform 0.3s ease-out, background-color 0.5s;
+      }
+
+      .box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease-out;
+      }
+
+      .box:hover {
+        transform: scale(0.95);
+        background-color: rgba(255, 255, 255, 0.5);
+      }
+
+      .box:hover img {
+        transform: scale(1);
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+      }
+      .animated-text {
+        display: inline-block;
+        font-size: 1.5em;
+        opacity: 0;
+        animation: popIn 4s ease-in-out forwards;
+        color: #000000;
+        font-weight: bold;
+        text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3),
+          -3px -3px 5px rgba(0, 0, 0, 0.3);
+      }
+
+      @keyframes popIn {
+        from {
+          opacity: 0;
+          transform: scale(0.5);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
+      section {
+        color: #ffffff;
+        margin-top: 50px;
+        padding: 30px 0;
+      }
+
+      section p {
+        max-width: 1000px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .sections-container {
+        position: relative;
+        width: 60%;
+        margin: 0 auto;
+      }
+
+      .sections-image {
+        width: 80%;
+        height: auto;
+        border-radius: 20px;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .sections-container:hover .sections-image {
+        opacity: 0.7; /* The image will become slightly transparent when hovered */
+      }
+
+      .image-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%); /* Centers the text */
+        color: white; /* Text color */
+        font-size: 2em;
+        font-weight: bold;
+        opacity: 0; /* Initially hidden */
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .sections-container:hover .image-overlay {
+        opacity: 1; /* Makes the text appear when the image is hovered */
+      }
+
+      #table-of-contents {
+        position: fixed;
+        top: 500px;
+        left: 10px;
+        background-color: rgba(51, 6, 3, 0.8);
+        padding: 10px;
+        border-radius: 7px;
+        display: none;
+        opacity: 0;
+        transform: translateX(-100%);
+        transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+        z-index: 1000;
+      }
+
+      #table-of-contents h2 {
+        color: #ffffff;
+      }
+      #table-of-contents.show {
+        display: block;
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      #table-of-contents a {
+        display: block;
+        padding: 10px 0;
+        text-decoration: none;
+        color: #ea4343;
+        font-size: 1.2em;
+      }
+
+      #table-of-contents a:hover {
+        color: #9b2929;
+      }
+
+      #table-of-contents h2 {
+        font-size: 1.5em;
+        text-align: center;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        font-size: 1em;
+        color: #ffffff;
+        cursor: pointer;
+      }
+
+      .close-btn:hover {
+        color: #d77a61;
+      }
+
+      .video-container {
+        position: relative;
+        width: 80%;
+        margin: 20px auto;
+        border-radius: 10px;
+      }
+
+      .video {
+        width: 60%;
+        height: auto;
+        border-radius: 20px;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .video-container:hover .video {
+        opacity: 0.7;
+      }
+
+      .video-overlay {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        font-size: 2em;
+        font-weight: bold;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+      }
+
+      .video-container:hover .video-overlay {
+        opacity: 1;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>The Cultural Contributions of Italians in Toronto</h1>
+
+    <p class="animated-text">
+      How did Italian immigrants shape Toronto's multicultural identity?
+    </p>
+
+    <div class="box" onclick="launchConfetti()">
+      <img
+        src="https://italianmarketphilly.org/wp-content/uploads/2023/10/IMF2023_EntertainmentSunday_CreditKatKuo_022-1024x681.jpg"
+        alt="Italy"
+        class="hover-image"
+      />
+    </div>
+
+    <button
+      class="interactive-btn"
+      onclick="changeColor(); showTableOfContents()"
+    >
+      Get Started
+    </button>
+
+    <div id="table-of-contents">
+      <span class="close-btn" onclick="hideTableOfContents()">&#10005;</span>
+      <h2>Table of Contents</h2>
+      <ul>
+        <li><a href="#section1">Introduction</a></li>
+        <li><a href="#section2">Cultural Contributions</a></li>
+        <li><a href="#section3">Italian Heritage Sites</a></li>
+        <li><a href="#section4">Conclusion</a></li>
+      </ul>
+    </div>
+
+    <section id="section1">
+      <h2>Introduction</h2>
+      <p>a</p>
+      <div class="video-container">
+        <video class="video" autoplay loop muted>
+          <source
+            src="https://videos.pexels.com/video-files/15437345/15437345-uhd_2560_1440_24fps.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div class="video-overlay">
+          <span>Atrani, Campania</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="section2">
+      <h2>Cultural Contributions</h2>
+      <p>b</p>
+      <div class="sections-container">
+        <img
+          class="sections-image"
+          src="https://images.pexels.com/photos/31321238/pexels-photo-31321238/free-photo-of-street-musician-playing-guitar-outdoors.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        />
+        <div class="image-overlay">
+          <span>Venice, Veneto</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="section3">
+      <h2>Italian Heritage Sites</h2>
+      <p>b</p>
+      <div class="sections-container">
+        <img
+          class="sections-image"
+          src="https://lh3.googleusercontent.com/p/AF1QipOCudBI8vHkVcSQgFwVZrz5liIOXiTCAwCZYXW6=s680-w680-h510"
+        />
+        <div class="image-overlay">
+          <span>Casa Abruzzo, Toronto</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="section4">
+      <h2>Conclusion</h2>
+      <p>b</p>
+      <div class="sections-container">
+        <img
+          class="sections-image"
+          src="https://images.pexels.com/photos/31252109/pexels-photo-31252109/free-photo-of-historic-tram-street-scene-in-porta-ticinese-milan.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        />
+        <div class="image-overlay">
+          <span>Milano, Lombardy</span>
+        </div>
+      </div>
+    </section>
+    <script>
+      let player;
+
+      function onYouTubeIframeAPIReady() {
+        player = new YT.Player("youtubePlayer", {
+          events: {
+            onReady: function (event) {
+              event.target.playVideo();
+            },
+          },
+        });
+      }
+
+      function launchConfetti() {
+        const box = document.querySelector(".box");
+        const boxRect = box.getBoundingClientRect(); // Get position of the box
+
+        confetti({
+          particleCount: 100,
+          spread: 90,
+          origin: {
+            x: (boxRect.left + boxRect.width / 2) / window.innerWidth, // Center x position of the box
+            y: (boxRect.top + boxRect.height / 2) / window.innerHeight, // y position at the vertical center of the box
+          },
+          colors: ["#ff6347", "#32cd32", "#1e90ff", "#ff1493"],
+        });
+      }
+
+      function changeColor() {
+        const button = document.querySelector(".interactive-btn");
+
+        button.addEventListener("mousedown", () => {
+          button.style.backgroundColor = "#c96551";
+        });
+
+        button.addEventListener("mouseup", () => {
+          button.style.backgroundColor = "#9b2929";
+        });
+
+        button.addEventListener("mouseleave", () => {
+          button.style.backgroundColor = "#9b2929";
+        });
+      }
+
+      function showTableOfContents() {
+        const toc = document.getElementById("table-of-contents");
+        toc.style.display = "block";
+        setTimeout(() => {
+          toc.classList.add("show");
+        }, 10);
+      }
+
+      function hideTableOfContents() {
+        const toc = document.getElementById("table-of-contents");
+        toc.classList.remove("show");
+        setTimeout(() => {
+          toc.style.display = "none";
+        }, 500);
+      }
+    </script>
+  </body>
+</html>
